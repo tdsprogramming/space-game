@@ -1,6 +1,4 @@
-import preload from './preload';
-import create from './create';
-import update from './update';
+import SceneMain from './Scenes/SceneMain.js';
 
 var config = {
     type: Phaser.AUTO,
@@ -12,10 +10,8 @@ var config = {
             debug: false
         }
     },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
+    scene: [
+        SceneMain
+    ]
 };
 export default config;
