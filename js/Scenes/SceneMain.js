@@ -1,4 +1,5 @@
 import Player from '../Players/Player.js';
+import Block from '../Blocks/Block.js';
 import PlayerShooter from '../Players/PlayerShooter.js';
 
 class SceneMain extends Phaser.Scene{
@@ -67,6 +68,13 @@ class SceneMain extends Phaser.Scene{
 
         if(this.keyPlayerTwoForward.isDown){
             this.playerTwo.moveForward();
+            this.playerOne.addBlock(new Block(
+                this,
+                this.playerOne,
+                'squadron2',
+                -1,
+                0,
+            ));
         }
         else if(this.keyPlayerTwoBackward.isDown){
             this.playerTwo.moveBackward();
@@ -80,12 +88,7 @@ class SceneMain extends Phaser.Scene{
         if(this.keyPlayerTwoShoot.isDown){
             this.playerTwo.shoot(this.playerOne);
         }
-        if(this.playerOne.data.list.health <= 0){
-            alert("Game over!");
-        }
-        if(this.playerOne.data.list.health <= 0){
-            alert("Game over!");
-        }
+
     }
 }
 

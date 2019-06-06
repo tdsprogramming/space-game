@@ -1,6 +1,7 @@
 import PlayerShooter from './PlayerShooter.js';
+import Entity from '../Entities/Entity.js';
 
-class Player extends Phaser.Physics.Arcade.Sprite{
+class Player extends Entity{
     constructor(scene, x, y, key){
         super(scene, x, y, key);
         this.scene = scene;
@@ -8,7 +9,8 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         this.scene.physics.world.enableBody(this, 0);
         this.setData("velocity", 200);
         this.setData("isDead", false);
-        this.setData("health", 100)
+        this.setData("health", 100);
+        this.setData("blocks", null);
     }
     // create an x and y orientation method for easier calculation moveFroward, BAkcward and shoot
     rotateClockwise(){
@@ -20,6 +22,9 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     moveForward(){
         this.body.velocity.x = -this.getData("velocity") * Math.sin(-this.body.rotation*.017);
         this.body.velocity.y = -this.getData("velocity") * Math.cos(-this.body.rotation*.017);
+        if(this.getData('blocks') != null){
+            this.getData('blocks').updateLocation();
+        }
     }
     moveBackward(){
         this.body.velocity.x = this.getData("velocity") * Math.sin(-this.body.rotation*.017);
@@ -40,6 +45,9 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     }
     loseHealth(){
         console.log(this.data.list.health -= 10);
+    }
+    addBlock(block){
+        this.setData('blocks', block);
     }
 }
 
