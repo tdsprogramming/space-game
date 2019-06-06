@@ -1,6 +1,6 @@
 # Space Game
 
-npm install parcel
-npm install http-server
 
-parcel index.html
+1. `npm install parcel`
+2. `npm install http-server`
+3. `parcel index.html`

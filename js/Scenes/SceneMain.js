@@ -1,4 +1,5 @@
 import Player from '../Players/Player.js';
+import Block from '../Blocks/Block.js';
 import PlayerShooter from '../Players/PlayerShooter.js';
 
 class SceneMain extends Phaser.Scene{
@@ -49,6 +50,9 @@ class SceneMain extends Phaser.Scene{
         this.physics.add.collider(this.playerOne, this.playerTwo);
     }
     update(){
+        for(var i = 0; i < this.playerOne.getData('blocks').length; i++){
+            this.playerOne.getData('blocks')[i].updateLocation();
+        }
         if(this.keyPlayerOneForward.isDown){
             this.playerOne.moveForward();
         }
@@ -66,6 +70,13 @@ class SceneMain extends Phaser.Scene{
         }
 
         if(this.keyPlayerTwoForward.isDown){
+            this.playerOne.addBlock(new Block(
+                this,
+                this.playerOne,
+                'squadron2',
+                -1,
+                0,
+            ));
             this.playerTwo.moveForward();
         }
         else if(this.keyPlayerTwoBackward.isDown){
@@ -79,12 +90,6 @@ class SceneMain extends Phaser.Scene{
         }
         if(this.keyPlayerTwoShoot.isDown){
             this.playerTwo.shoot(this.playerOne);
-        }
-        if(this.playerOne.data.list.health <= 0){
-            alert("Game over!");
-        }
-        if(this.playerOne.data.list.health <= 0){
-            alert("Game over!");
         }
     }
 }
