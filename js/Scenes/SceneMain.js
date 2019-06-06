@@ -50,6 +50,9 @@ class SceneMain extends Phaser.Scene{
         this.physics.add.collider(this.playerOne, this.playerTwo);
     }
     update(){
+        for(var i = 0; i < this.playerOne.getData('blocks').length; i++){
+            this.playerOne.getData('blocks')[i].updateLocation();
+        }
         if(this.keyPlayerOneForward.isDown){
             this.playerOne.moveForward();
         }
@@ -67,7 +70,6 @@ class SceneMain extends Phaser.Scene{
         }
 
         if(this.keyPlayerTwoForward.isDown){
-            this.playerTwo.moveForward();
             this.playerOne.addBlock(new Block(
                 this,
                 this.playerOne,
@@ -75,6 +77,7 @@ class SceneMain extends Phaser.Scene{
                 -1,
                 0,
             ));
+            this.playerTwo.moveForward();
         }
         else if(this.keyPlayerTwoBackward.isDown){
             this.playerTwo.moveBackward();
@@ -88,7 +91,6 @@ class SceneMain extends Phaser.Scene{
         if(this.keyPlayerTwoShoot.isDown){
             this.playerTwo.shoot(this.playerOne);
         }
-
     }
 }
 
